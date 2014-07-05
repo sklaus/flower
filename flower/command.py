@@ -35,7 +35,7 @@ define("db", type=str, default='flower', help="flower database file")
 define("persistent", type=bool, default=False, help="enable persistent mode")
 define("broker_api", type=str, default=None,
        help="inspect broker e.g. http://guest:guest@localhost:15672/api/")
-define("broker_url", type=str, default=None,
+define("broker", type=str, default=None,
        help="define broker e.g. redis://172.16.0.129:6380/0")
 define("certfile", type=str, default=None, help="path to SSL certificate file")
 define("keyfile", type=str, default=None, help="path to SSL key file")
@@ -67,13 +67,13 @@ class FlowerCommand(Command):
             settings.URL_PREFIX = prefix
         settings.CELERY_INSPECT_TIMEOUT = options.inspect_timeout
         settings.AUTO_REFRESH = options.auto_refresh
-        settings.BROKER_URL = options.broker_url
+
 
         if options.debug:
             logging.getLogger().setLevel(logging.DEBUG)
 
         # Monkey-patch to support Celery 2.5.5
-        self.app.connection = self.app.broker_connection
+        #self.app.connection = self.app.broker_connection
         flower = Flower(celery_app=self.app, options=options,
                         **app_settings)
         atexit.register(flower.stop)
