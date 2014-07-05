@@ -67,6 +67,7 @@ class FlowerCommand(Command):
             settings.URL_PREFIX = prefix
         settings.CELERY_INSPECT_TIMEOUT = options.inspect_timeout
         settings.AUTO_REFRESH = options.auto_refresh
+        settings.BROKER_URL = options.broker_url
 
         if options.debug:
             logging.getLogger().setLevel(logging.DEBUG)
