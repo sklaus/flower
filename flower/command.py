@@ -74,12 +74,8 @@ class FlowerCommand(Command):
         if options.debug:
             logging.getLogger().setLevel(logging.DEBUG)
 
+        #set the celery BROKER_URL based on the config broker value
         self.app.conf['BROKER_URL'] = options.broker
-        logging.debug("App argv: %s" % argv)
-        logging.debug("App settings: %s" % app_settings)
-        for opt in options:
-            logging.debug("Tornado options: %s : %s" % (opt, getattr(options, opt)))
-        logging.debug("Celery conf: %s" % self.app.conf)
         # Monkey-patch to support Celery 2.5.5
         #self.app.connection = self.app.broker_connection
         flower = Flower(celery_app=self.app, options=options,
