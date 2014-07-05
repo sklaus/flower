@@ -54,7 +54,6 @@ class FlowerCommand(Command):
             parse_config_file('flowerconfig.py', final=False)
         except IOError:
             pass
-        logging.debug("App argv: %s" % argv)
         parse_command_line([prog_name] + argv)
 
         app_settings['debug'] = options.debug
@@ -73,6 +72,9 @@ class FlowerCommand(Command):
         if options.debug:
             logging.getLogger().setLevel(logging.DEBUG)
 
+        logging.debug("App argv: %s" % argv)
+        logging.debug("App settings: %s" % app_settings)
+        logging.debug("App options: %s" % options)
         # Monkey-patch to support Celery 2.5.5
         #self.app.connection = self.app.broker_connection
         flower = Flower(celery_app=self.app, options=options,
