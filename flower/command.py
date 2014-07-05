@@ -76,8 +76,8 @@ class FlowerCommand(Command):
 
         logging.debug("App argv: %s" % argv)
         logging.debug("App settings: %s" % app_settings)
-        for opt in options:
-            logging.debug("Tornado options: %s : %s" % (opt, options.opt))
+        for opt, value in options:
+            logging.debug("Tornado options: %s : %s" % (opt, value))
         # Monkey-patch to support Celery 2.5.5
         #self.app.connection = self.app.broker_connection
         flower = Flower(celery_app=self.app, options=options,
