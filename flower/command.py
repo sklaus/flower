@@ -54,6 +54,7 @@ class FlowerCommand(Command):
             parse_config_file('flowerconfig.py', final=False)
         except IOError:
             pass
+        logging.debug("App argv: %s" %argv)
         parse_command_line([prog_name] + argv)
 
         app_settings['debug'] = options.debug
