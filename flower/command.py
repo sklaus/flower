@@ -3,6 +3,7 @@ from __future__ import print_function
 
 import atexit
 import logging
+import os
 import signal
 import sys
 
@@ -76,6 +77,9 @@ class FlowerCommand(Command):
 
         #set the celery BROKER_URL based on the config broker value
         self.app.conf['BROKER_URL'] = options.broker
+        #overwrite if environment variables REDIS_HOST, REDIS_PORT, REDIS_DB are set
+        if os.environ.get('REDIS_HOST') and os.environ.get('REDIS_PORT')  and os.environ.get('REDIS_DB'):
+            self.app.conf['BROKER_URL'] = "redis:://" + os.environ.get('REDIS_HOST') + ":" + os.environ.get('REDIS_PORT') + "/" os.environ.get('REDIS_DB')
         # Monkey-patch to support Celery 2.5.5
         #self.app.connection = self.app.broker_connection
         flower = Flower(celery_app=self.app, options=options,
