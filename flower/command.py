@@ -52,6 +52,7 @@ class FlowerCommand(Command):
         argv = list(filter(self.flower_option, argv))
         try:
             parse_config_file('flowerconfig.py', final=False)
+            logging.debug("Parsed Flower configfile")
         except IOError:
             logging.debug("Flower configfile not found")
             pass
