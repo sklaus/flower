@@ -22,6 +22,7 @@ class Flower(tornado.web.Application):
         self.auth = getattr(self.options, 'auth', [])
         self.basic_auth = getattr(self.options, 'basic_auth', None)
         self.broker_api = getattr(self.options, 'broker_api', None)
+        self.broker_url = getattr(self.options, 'broker_url', None)
         self.ssl = None
         if options and self.options.certfile and self.options.keyfile:
             cwd = os.environ.get('PWD') or os.getcwd()
