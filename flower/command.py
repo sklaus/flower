@@ -35,6 +35,8 @@ define("db", type=str, default='flower', help="flower database file")
 define("persistent", type=bool, default=False, help="enable persistent mode")
 define("broker_api", type=str, default=None,
        help="inspect broker e.g. http://guest:guest@localhost:15672/api/")
+define("broker_url", type=str, default=None,
+       help="define broker e.g. redis://172.16.0.129:6380/0")
 define("certfile", type=str, default=None, help="path to SSL certificate file")
 define("keyfile", type=str, default=None, help="path to SSL key file")
 define("xheaders", type=bool, default=False,
